@@ -17,14 +17,14 @@ export default observer( function SatScreen({isEditmode, isAutoAnimationExec}: P
       <Canvas
         gl={{ 
           antialias: true, 
-          outputEncoding : LinearEncoding,
-          toneMapping: NoToneMapping,
+          //outputEncoding : LinearEncoding,
+          //toneMapping: NoToneMapping,
         }}
         onCreated={({ gl, scene }) => {
           //gl.toneMappingExposure = Math.pow(2, selectedArticle?.exposure ? selectedArticle.exposure : 0.0);
           scene.environment = null;
 
-          scene.background = new Color("#000000")
+          scene.background = new Color("#111111")
         }}
         //linear={selectedArticle?.gammaOutput}        
         //flat={true}    
@@ -45,6 +45,12 @@ export default observer( function SatScreen({isEditmode, isAutoAnimationExec}: P
         makeDefault
       />
 
+        <ambientLight intensity={0.5} />
+        <mesh position={[0, 0, 0]}>
+            <sphereGeometry args={[1, 32, 32]} />
+            <meshStandardMaterial color="blue" />
+        </mesh>
+        <axesHelper position={[-2, -2, -2]} args={[4]} />
       </Canvas>
   );
 });
