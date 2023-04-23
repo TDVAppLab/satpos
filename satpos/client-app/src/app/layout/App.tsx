@@ -11,7 +11,7 @@ import { useStore } from '../stores/store';
 import LoadingComponent from './LoadingComponents';
 import ModalContainer from '../common/modals/ModalContainer';
 import AttachmentFileDashboard from '../../features/attachmentfiles/dashboard/AttachmentFileDashboard';
-import ArticleDashboard from '../../features/Articles/dashboard/ArticleDashboard';
+import ArticleDashboard from '../../features/Articles/dashboard/MainSatView';
 import ArticleDetails from '../../features/Articles/details/ArticleDetails';
 import ModelfileDashboard from '../../features/Modelfiles/dashboard/ModelfileDashboard';
 import RegisterForm from '../../features/users/RegisterForm';
@@ -27,6 +27,7 @@ import WebsiteSettingDashboard from '../../features/WebsiteSetting/dashboard/Web
 import WebsiteSettingForm from '../../features/WebsiteSetting/form/WebsiteSettingForm';
 import useTrackingGA4 from '../common/utils/useTrackingGA4';
 import { RouteAuthChk } from '../common/RouteAuthChk';
+import MainSatView from '../../features/Articles/dashboard/MainSatView';
 
 function App() {
 
@@ -62,25 +63,7 @@ function App() {
       <NavBar />
       <div className="container-fluid">
             <Routes>
-                <Route path = '/' element={<ArticleDashboard />} />       
-                <Route path = '/articles' element={<ArticleDashboard />} />
-                <Route path = '/article/:id' element={<ArticleDetails />} />                
-                <Route path = '/articleedit/:id' element={ <RouteAuthChk component={<ArticleEdit />} redirect="/login" isauth={true} /> } />
-                <Route path = '/createarticle' element={ <RouteAuthChk component={<ArticleEdit />} redirect="/login" isauth={true} /> } />
-
-                
-                <Route path = '/attachmentfiles' element={ <RouteAuthChk component={<AttachmentFileDashboard />} redirect="/login" isauth={true} /> } />
-                <Route path = '/attachmentfile/:id' element={ <RouteAuthChk component={<AttachmentFileDetails />} redirect="/login" isauth={true} /> } />
-                <Route path = '/attachmentfileedit/:id' element={ <RouteAuthChk component={<AttachmentfileEdit />} redirect="/login" isauth={true} /> } />
-                <Route path = '/attachmentfileupload' element={ <RouteAuthChk component={<AttachmentfileUpload />} redirect="/login" isauth={true} /> } />
-
-
-
-                <Route path = '/modelfiles' element={ <RouteAuthChk component={<ModelfileDashboard />} redirect="/login" isauth={true} /> } />
-                <Route path = '/modelfilecreate' element={ <RouteAuthChk component={<ModelfileCreate />} redirect="/login" isauth={true} /> } />
-                <Route key = {location.key} path = '/modelfileedit/:id' element={ <RouteAuthChk component={<ModelfileEdit />} redirect="/login" isauth={true} /> } />
-
-
+                <Route path = '/' element={<MainSatView />} />
 
                 <Route path = '/websitesettings' element={ <RouteAuthChk component={<WebsiteSettingDashboard />} redirect="/login" isauth={true} /> } />
                 <Route key = {location.key} path = '/websitesettingedit/:id' element={ <RouteAuthChk component={<WebsiteSettingForm />} redirect="/login" isauth={true} /> } />
