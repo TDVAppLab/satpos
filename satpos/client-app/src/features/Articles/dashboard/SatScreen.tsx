@@ -1,8 +1,14 @@
 import { Canvas } from '@react-three/fiber';
 import { observer } from 'mobx-react-lite';
 import { OrbitControls } from '@react-three/drei';
-import { Color, LinearEncoding, NoToneMapping, PMREMGenerator } from 'three';
+import { Color } from 'three';
+import { useLoader } from '@react-three/fiber'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 
+function Scene() {
+  const gltf = useLoader(GLTFLoader, './EarthHologram.gltf')
+  return <primitive object={gltf.scene} />
+}
 
 
 interface Props {
@@ -46,11 +52,16 @@ export default observer( function SatScreen({isEditmode, isAutoAnimationExec}: P
       />
 
         <ambientLight intensity={0.5} />
+        {
+        /*  
         <mesh position={[0, 0, 0]}>
             <sphereGeometry args={[1, 32, 32]} />
             <meshStandardMaterial color="blue" />
         </mesh>
+        */
+        }
         <axesHelper position={[-2, -2, -2]} args={[4]} />
+        <Scene />
       </Canvas>
   );
 });
