@@ -12,7 +12,7 @@ namespace Application.SatelliteOrbitalElement
 {
 
     
-    public class GetFromNORADActiveSatAPI
+    public class GetFromNORADActiveSatAPITLE
     {
         public class Command : IRequest<Result<Unit>>
         {
@@ -27,17 +27,20 @@ namespace Application.SatelliteOrbitalElement
             }
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
-                var url = "http://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=json";//
-
-                using var client = new HttpClient();
-                var response = await client.GetStringAsync(url);
+                var activasatstrings = await getStringfromURL("https://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=2le");//
                 
-                // JSON文字列をオブジェクトにデシリアライズする
-                var satdatalist = JsonSerializer.Deserialize<List<TDIC.Models.EDM.SatelliteOrbitalElement>>(response);
+                string[] lines = activasatstrings.Split(new []{ "\r\n" }, StringSplitOptions.None);
                 
-                foreach (var satdata in satdatalist)
+                List<TDIC.Models.EDM.tlestring> tles = new List<TDIC.Models.EDM.tlestring>();
+                
+                for (int i=0; i < lines.Length-1; i=i+2) {
+                    tles.Add(new TDIC.Models.EDM.tlestring{noradcatid= int.Parse(lines[i+1].Substring(2,5)), line1=lines[i],line2=lines[i+1]});
+                    
+                }
+                
+                foreach (var tle in tles)
                 {
-                    await _context.SatelliteOrbitalElements.AddAsync(satdata);
+                    await _context.tlestrings.AddAsync(tle);
                 }
 
                 var result = await _context.SaveChangesAsync() > 0;

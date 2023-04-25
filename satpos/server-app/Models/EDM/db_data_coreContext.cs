@@ -18,6 +18,7 @@ namespace TDIC.Models.EDM
 
 
         public virtual DbSet<SatelliteOrbitalElement> SatelliteOrbitalElements { get; set; }
+        public virtual DbSet<tlestring> tlestrings { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -25,6 +26,17 @@ namespace TDIC.Models.EDM
 
 
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
+
+
+
+            modelBuilder.Entity<tlestring>(entity =>
+            {
+                entity.HasKey(e => e.noradcatid);
+                entity.Property(e => e.noradcatid)
+                        .ValueGeneratedNever();
+
+                entity.ToTable("tlestrings");
+            });
 
 
 

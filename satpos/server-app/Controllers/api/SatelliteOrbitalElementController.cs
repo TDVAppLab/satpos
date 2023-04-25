@@ -9,6 +9,7 @@ using TDIC.DTOs;
 using System.Net.Http;
 using System.Text.Json;
 using System.Collections.Generic;
+using Application.tlestring;
 
 
 
@@ -31,9 +32,22 @@ namespace API.Controllers
         {
 
 
-            return HandleResult(await Mediator.Send(new GetFromNORADActiveSatAPI.Command{}));
+            return HandleResult(await Mediator.Send(new GetFromNORADActiveSatAPITLE.Command{}));
         }
 
+        [AllowAnonymous]
+        [HttpGet("details/{id}")]
+        public async Task<ActionResult> GetActivity(int id)
+        {
+            return HandleResult(await Mediator.Send(new Details.Query{ID = id}));
+        }
+
+        [AllowAnonymous]
+        [HttpGet("gettlestring/{id}")]
+        public async Task<ActionResult> GetTleString(int id)
+        {
+            return HandleResult(await Mediator.Send(new GetTleString.Query{ID = id}));
+        }
 
     }
 }

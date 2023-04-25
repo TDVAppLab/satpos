@@ -5,6 +5,7 @@ import GoogleAd from '../../../app/common/utils/GoogleAd';
 import LoadingComponent from '../../../app/layout/LoadingComponents';
 import { useStore } from '../../../app/stores/store';
 import SatScreen from './SatScreen';
+import satpostester from './satpostester';
 
 export default observer(function MainSatView() {      
 
@@ -17,6 +18,11 @@ export default observer(function MainSatView() {
   
   */
 //    if(articleStore.loading) return <LoadingComponent content='Loading articles...' />
+
+useEffect(() => {
+    satpostester();
+
+  }, []);
 
 
 

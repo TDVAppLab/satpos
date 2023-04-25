@@ -16,6 +16,8 @@ import { User, UserFormValues } from "../models/user";
 import { View } from "../models/view";
 import { WebsiteSetting } from "../models/WebsiteSetting";
 import { store } from "../stores/store";
+import { SatelliteOrbitalElement } from "../models/SatelliteOrbitalElement";
+import { tlestring } from "../models/tlestring";
 
 const sleep = (delay: number) => {
     return new Promise((resolve)=>{
@@ -185,6 +187,12 @@ const WebsiteSettings = {
     delete: (title:string) => axios.post<void>(`/websitesetting/delete/title=${title}`),
 }
 
+const SatelliteOrbitalElements = {
+    details:(title:string) => requests.get<SatelliteOrbitalElement>(`/SatelliteOrbitalElement/details/${title}`),
+    gettlestring:(id:string) => requests.get<tlestring>(`/SatelliteOrbitalElement/gettlestring/${id}`),
+    //
+}
+
 
 const agent = {
     Account,
@@ -199,6 +207,7 @@ const agent = {
     Instanceobjects,
     MArticleStatus,
     WebsiteSettings,
+    SatelliteOrbitalElements,
 }
 
 export default agent;
