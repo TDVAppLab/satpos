@@ -6,9 +6,19 @@ import { SatelliteOrbitalElement } from '../../../app/models/SatelliteOrbitalEle
 
 
 export default async function satpostester() {
+
+    
+    const object = await agent.SatelliteOrbitalElements.gettlestring("25544");
+
+    const line1 = object.line1;
+    const line2 = object.line2;
+
+
+
+
     // TLEを使い、satrecオブジェクトを初期化
-    const line1 = '1 25544U 98067A   21260.38326868  .00002108  00000-0  47329-4 0  9995';
-    const line2 = '2 25544  51.6436 246.8533 0003182  25.6729 121.4393 15.48402825302886';
+    //const line1 = '1 25544U 98067A   21260.38326868  .00002108  00000-0  47329-4 0  9995';
+    //const line2 = '2 25544  51.6436 246.8533 0003182  25.6729 121.4393 15.48402825302886';
     const satrec = satellite.twoline2satrec(line1, line2);
     console.log(satrec);
 
@@ -30,41 +40,7 @@ export default async function satpostester() {
 
 
     
-    const object = await agent.SatelliteOrbitalElements.details("25544");
-    console.log(object);
-    generateTLE(object);
-    //--------------------------------------------
-    
-    // 現在時刻の衛星の位置を計算
-    const satrec2 : satellite.SatRec = {
-        satnum: '25544',
-        epochyr: 21,
-        epochdays: 260.38326868,
-        jdsatepoch: 0,
-        ndot:  .00002108,
-        nddot: 0,
-        bstar: 0.000047329,
-        inclo: satellite.degreesToRadians(51.6436),
-        nodeo: satellite.degreesToRadians(246.8533),
-        ecco: 0.0003182,
-        argpo: satellite.degreesToRadians(25.6729),
-        mo: satellite.degreesToRadians(121.4393),
-        no: satellite.degreesToRadians(15.48402825)/(24*60),
-        error: 0
-    };
-    const { position: positionEci2 } = satellite.propagate(satrec2, now);
-    console.log(satrec2);
-    
-    // 衛星位置の座標系を変換(ECI -> geodetic location)
-    const gstime2 = satellite.gstime(now); // GMST(グリニッジ恒星時)に変換
-
-    //@ts-ignore
-    const positionGd2 = satellite.eciToGeodetic(positionEci2, gstime2);
-    
-    // 計算結果
-    console.log(positionGd2.longitude); // 経度[rad]
-    console.log(positionGd2.latitude); // 緯度[rad]
-    console.log(positionGd2.height); // 高度[km]
+   
 }
 
 
