@@ -3,6 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { OrbitControls } from '@react-three/drei';
 import { Color } from 'three';
 import SimpleEarthPlot from './SimpleEarthPlot';
+import SatPlot from './SatPlot';
 
 interface Props {
   isEditmode : boolean
@@ -55,6 +56,7 @@ export default observer( function SatScreen({isEditmode, isAutoAnimationExec}: P
         }
         <axesHelper position={[-2, -2, -2]} args={[4]} />
         <SimpleEarthPlot />
+        <SatPlot noradcatid={25544}/>
       </Canvas>
   );
 });

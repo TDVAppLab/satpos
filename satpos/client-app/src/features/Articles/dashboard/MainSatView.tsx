@@ -18,12 +18,12 @@ export default observer(function MainSatView() {
   
   */
 //    if(articleStore.loading) return <LoadingComponent content='Loading articles...' />
-
+/*
 useEffect(() => {
     satpostester();
 
   }, []);
-
+*/
 
 
     return(
