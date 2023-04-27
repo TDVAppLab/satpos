@@ -1,5 +1,5 @@
 import * as satellite from 'satellite.js';
-import agent from '../../../app/api/agent';
+import agent from '../../app/api/agent';
 import { useEffect, useRef, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
 

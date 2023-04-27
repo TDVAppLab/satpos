@@ -11,7 +11,7 @@ import { useStore } from '../stores/store';
 import LoadingComponent from './LoadingComponents';
 import ModalContainer from '../common/modals/ModalContainer';
 import AttachmentFileDashboard from '../../features/attachmentfiles/dashboard/AttachmentFileDashboard';
-import ArticleDashboard from '../../features/Articles/dashboard/MainSatView';
+import ArticleDashboard from '../../features/MainSatView/MainSatView';
 import ArticleDetails from '../../features/Articles/details/ArticleDetails';
 import ModelfileDashboard from '../../features/Modelfiles/dashboard/ModelfileDashboard';
 import RegisterForm from '../../features/users/RegisterForm';
@@ -27,7 +27,7 @@ import WebsiteSettingDashboard from '../../features/WebsiteSetting/dashboard/Web
 import WebsiteSettingForm from '../../features/WebsiteSetting/form/WebsiteSettingForm';
 import useTrackingGA4 from '../common/utils/useTrackingGA4';
 import { RouteAuthChk } from '../common/RouteAuthChk';
-import MainSatView from '../../features/Articles/dashboard/MainSatView';
+import MainSatView from '../../features/MainSatView/MainSatView';
 
 function App() {
 

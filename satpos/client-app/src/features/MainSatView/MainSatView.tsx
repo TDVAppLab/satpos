@@ -1,11 +1,10 @@
 import { observer } from 'mobx-react-lite';
 import { useEffect } from 'react';
 import { Container } from 'react-bootstrap';
-import GoogleAd from '../../../app/common/utils/GoogleAd';
-import LoadingComponent from '../../../app/layout/LoadingComponents';
-import { useStore } from '../../../app/stores/store';
+import GoogleAd from '../../app/common/utils/GoogleAd';
+import LoadingComponent from '../../app/layout/LoadingComponents';
+import { useStore } from '../../app/stores/store';
 import SatScreen from './SatScreen';
-import satpostester from './satpostester';
 
 export default observer(function MainSatView() {      
 
