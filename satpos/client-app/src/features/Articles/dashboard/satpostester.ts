@@ -34,8 +34,8 @@ export default async function satpostester() {
     const positionGd = satellite.eciToGeodetic(positionEci, gstime);
     
     // 計算結果
-    console.log(positionGd.longitude); // 経度[rad]
-    console.log(positionGd.latitude); // 緯度[rad]
+    console.log(positionGd.longitude*180/3.14); // 経度[rad]
+    console.log(positionGd.latitude*180/3.14); // 緯度[rad]
     console.log(positionGd.height); // 高度[km]
 
 
