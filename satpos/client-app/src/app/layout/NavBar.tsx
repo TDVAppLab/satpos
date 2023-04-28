@@ -19,11 +19,10 @@ export default observer ( function NavBar() {
     return(
         <Navbar bg="dark" variant="dark" expand="sm" className="border-bottom box-shadow mb-3">
             <Container>
-                <Navbar.Brand as={NavLink} to="/">3D Aerospace Museum</Navbar.Brand>
+                <Navbar.Brand as={NavLink} to="/">SatelliTrack</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link as={NavLink} to="/articles">Contents</Nav.Link>
                         {
                             user && 
                                 <>

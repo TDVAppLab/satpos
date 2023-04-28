@@ -27,6 +27,13 @@ namespace Application.SatelliteOrbitalElement
             }
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
+
+                
+                var satJsonStrings = await getStringfromURL("http://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=json");//
+                var satJsonList = JsonSerializer.Deserialize<List<TDIC.Models.EDM.SatelliteOrbitalElement>>(satJsonStrings);
+
+
+
                 var activasatstrings = await getStringfromURL("https://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=2le");//
                 
                 string[] lines = activasatstrings.Split(new []{ "\r\n" }, StringSplitOptions.None);
@@ -34,10 +41,14 @@ namespace Application.SatelliteOrbitalElement
                 List<TDIC.Models.EDM.tlestring> tles = new List<TDIC.Models.EDM.tlestring>();
                 
                 for (int i=0; i < lines.Length-1; i=i+2) {
-                    tles.Add(new TDIC.Models.EDM.tlestring{noradcatid= int.Parse(lines[i+1].Substring(2,5)), line1=lines[i],line2=lines[i+1]});
+                    tles.Add(new TDIC.Models.EDM.tlestring{
+                        noradcatid= int.Parse(lines[i+1].Substring(2,5)), 
+                        line1=lines[i],
+                        line2=lines[i+1],
+                        objectname = (satJsonList.Find(x => x.NORAD_CAT_ID == int.Parse(lines[i+1].Substring(2,5))) ?? new TDIC.Models.EDM.SatelliteOrbitalElement{OBJECT_NAME = ""}) .OBJECT_NAME
+                    });
                     
                 }
-                
                 foreach (var tle in tles)
                 {
                     await _context.tlestrings.AddAsync(tle);

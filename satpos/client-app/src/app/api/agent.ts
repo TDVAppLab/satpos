@@ -88,6 +88,7 @@ const WebsiteSettings = {
 }
 
 const SatelliteOrbitalElements = {
+    list:() => requests.get<tlestring[]>(`/SatelliteOrbitalElement/index`),
     details:(title:string) => requests.get<SatelliteOrbitalElement>(`/SatelliteOrbitalElement/details/${title}`),
     gettlestring:(id:string) => requests.get<tlestring>(`/SatelliteOrbitalElement/gettlestring/${id}`),
     //

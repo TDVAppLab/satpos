@@ -9,20 +9,18 @@ import SatScreen from './SatScreen';
 export default observer(function MainSatView() {      
 
     
-    const {userStore: {user}} = useStore();
-  /*
-    useEffect(() => {
-        if(articleRegistry.size <= 1) loadArticles();
-    },[articleRegistry.size, loadArticles])
+    const { siteAnalyticsStore } = useStore();
+    
+    const { tlestringStore } = useStore();
+    const { loadObjects } = tlestringStore;
+    const { userStore: {user}} = useStore();
   
-  */
-//    if(articleStore.loading) return <LoadingComponent content='Loading articles...' />
-/*
-useEffect(() => {
-    satpostester();
-
-  }, []);
-*/
+    useEffect(() => {
+        if(tlestringStore.tlestringRegistry.size <= 1) loadObjects();
+    },[tlestringStore.tlestringRegistry.size, loadObjects])
+  
+  
+    if(tlestringStore.loading) return <LoadingComponent content='Loading objects...' />
 
 
     return(

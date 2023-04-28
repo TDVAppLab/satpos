@@ -19,6 +19,7 @@ namespace TDIC.Models.EDM
 
         public virtual DbSet<SatelliteOrbitalElement> SatelliteOrbitalElements { get; set; }
         public virtual DbSet<tlestring> tlestrings { get; set; }
+        public virtual DbSet<t_website_setting> t_website_settings { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -47,6 +48,23 @@ namespace TDIC.Models.EDM
                         .ValueGeneratedNever();
 
                 entity.ToTable("SatelliteOrbitalElements");
+            });
+
+            modelBuilder.Entity<t_website_setting>(entity =>
+            {
+                entity.HasKey(e => e.title);
+
+                entity.ToTable("t_website_setting");
+
+                entity.Property(e => e.title).HasMaxLength(50);
+
+                entity.Property(e => e.create_user).HasMaxLength(50);
+
+                entity.Property(e => e.data).HasMaxLength(2000);
+
+                entity.Property(e => e.latest_update_user).HasMaxLength(50);
+
+                entity.Property(e => e.memo).HasMaxLength(255);
             });
 
             OnModelCreatingPartial(modelBuilder);

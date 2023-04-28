@@ -15,10 +15,10 @@ namespace Application.SatelliteOrbitalElement
 {
     public class List
     {
-        public class Query : IRequest<Result<List<TDIC.Models.EDM.SatelliteOrbitalElement>>>{
+        public class Query : IRequest<Result<List<TDIC.Models.EDM.tlestring>>>{
         }
 
-        public class Handler : IRequestHandler<Query, Result<List<TDIC.Models.EDM.SatelliteOrbitalElement>>>
+        public class Handler : IRequestHandler<Query, Result<List<TDIC.Models.EDM.tlestring>>>
         {
             private readonly db_data_coreContext _context;
             public Handler(db_data_coreContext context)
@@ -26,10 +26,10 @@ namespace Application.SatelliteOrbitalElement
                 _context = context;
             }
 
-            public async Task<Result<List<TDIC.Models.EDM.SatelliteOrbitalElement>>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Result<List<TDIC.Models.EDM.tlestring>>> Handle(Query request, CancellationToken cancellationToken)
             {                
-                return Result<List<TDIC.Models.EDM.SatelliteOrbitalElement>>
-                    .Success(await _context.SatelliteOrbitalElements.ToListAsync(cancellationToken));
+                return Result<List<TDIC.Models.EDM.tlestring>>
+                    .Success(await _context.tlestrings.ToListAsync(cancellationToken));
             }
         }
     }
