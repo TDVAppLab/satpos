@@ -1,10 +1,11 @@
 import { observer } from 'mobx-react-lite';
 import { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import agent from '../../app/api/agent';
 import LoadingComponent from '../../app/layout/LoadingComponents';
 import { batchlog } from '../../app/models/batchlog';
+import { toast } from 'react-toastify';
+import { Form, Formik } from 'formik';
 
 export default observer(function Batchlog() {
 
@@ -16,15 +17,31 @@ export default observer(function Batchlog() {
         })
     },[])  
   
+
+    async function UpdateActiveSatData() {
+        await agent.batchlogs.getactivesatapi();
+        toast.info('Updated');
+    }
+
+
     if(!batchlogs) return <LoadingComponent />
 
     return(
         <Container>
             
-            <Link to={`/websitesettingcreate`}>
-                <h3 >Create</h3>
-            </Link>
-            
+            <Formik
+                enableReinitialize 
+                initialValues={{}}
+                onSubmit={values => UpdateActiveSatData()}>
+                {({ handleSubmit, isValid, isSubmitting }) => (
+                    <Form className="ui form" onSubmit = {handleSubmit} autoComplete='off'>
+                        <button disabled={!isValid || isSubmitting } type = 'submit' className='btn btn-primary'>
+                            {isSubmitting ? "Processing" : "Run Batch"}
+                        </button>
+                    </Form>
+                )}
+            </Formik>
+
             <hr />
 
 

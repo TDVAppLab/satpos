@@ -45,13 +45,23 @@ namespace Application.BatchLog
                         noradcatid= int.Parse(lines[i+1].Substring(2,5)), 
                         line1=lines[i],
                         line2=lines[i+1],
-                        objectname = (satJsonList.Find(x => x.NORAD_CAT_ID == int.Parse(lines[i+1].Substring(2,5))) ?? new TDIC.Models.EDM.SatelliteOrbitalElement{OBJECT_NAME = ""}) .OBJECT_NAME
+                        objectname = (satJsonList.Find(x => x.NORAD_CAT_ID == int.Parse(lines[i+1].Substring(2,5))) ?? new TDIC.Models.EDM.SatelliteOrbitalElement{OBJECT_NAME = ""}) .OBJECT_NAME,
+                        latest_update_datetime = DateTime.Now
                     });
                     
                 }
                 foreach (var tle in tles)
                 {
-                    await _context.tlestrings.AddAsync(tle);
+                    var dbtle = await _context.tlestrings.FindAsync(tle.noradcatid);
+
+                    if(dbtle == null) {
+                        await _context.tlestrings.AddAsync(tle);                       
+                    } else {
+                        dbtle.line1 = tle.line1;
+                        dbtle.line2 = tle.line2;
+                        dbtle.objectname = tle.objectname;
+                        dbtle.latest_update_datetime = DateTime.Now;
+                    }
                 }
 
                 //--------------------------

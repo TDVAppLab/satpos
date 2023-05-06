@@ -97,6 +97,8 @@ const SatelliteOrbitalElements = {
 
 const batchlogs = {
     list:() => requests.get<batchlog[]>(`/batch/index`),
+    getactivesatapi: () => axios.post<void>(`/batch/getactivesatapi/`),
+//    batch01:() => requests.get<>(`/batch/index`),
 }
 
 

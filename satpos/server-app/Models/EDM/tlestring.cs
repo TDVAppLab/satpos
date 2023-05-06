@@ -12,5 +12,6 @@ namespace TDIC.Models.EDM
         public string objectname { get; set; }
         public string line1 { get; set; }
         public string line2 { get; set; }
+        public DateTime? latest_update_datetime { get; set; }
     }
 }
