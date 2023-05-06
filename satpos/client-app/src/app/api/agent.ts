@@ -6,6 +6,7 @@ import { WebsiteSetting } from "../models/WebsiteSetting";
 import { store } from "../stores/store";
 import { SatelliteOrbitalElement } from "../models/SatelliteOrbitalElement";
 import { tlestring } from "../models/tlestring";
+import { batchlog } from "../models/batchlog";
 
 const sleep = (delay: number) => {
     return new Promise((resolve)=>{
@@ -94,11 +95,16 @@ const SatelliteOrbitalElements = {
     //
 }
 
+const batchlogs = {
+    list:() => requests.get<batchlog[]>(`/batch/index`),
+}
+
 
 const agent = {
     Account,
     WebsiteSettings,
     SatelliteOrbitalElements,
+    batchlogs,
 }
 
 export default agent;

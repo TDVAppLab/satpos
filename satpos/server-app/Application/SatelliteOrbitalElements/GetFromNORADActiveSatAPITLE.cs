@@ -54,6 +54,15 @@ namespace Application.SatelliteOrbitalElement
                     await _context.tlestrings.AddAsync(tle);
                 }
 
+                //--------------------------
+                //logテーブルに記録
+                var batchlog = new batchlog{
+                    opcode = 1,
+                    batchdate = DateTime.Now
+                };
+                    await _context.batchlogs.AddAsync(batchlog);
+                //--------------------------
+
                 var result = await _context.SaveChangesAsync() > 0;
 
                 if(!result) return Result<Unit>.Failure("fail to delete t_instruction");

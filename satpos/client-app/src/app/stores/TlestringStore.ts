@@ -27,6 +27,10 @@ export default class TlestringStore {
         }
     }
 
+    setSelectedTlestring = (id: string) => {
+        this.selectedTlestring = this.tlestringRegistry.get(id);
+    }
+
     private setObject = (object : tlestring) => {
         this.tlestringRegistry.set(object.noradcatid.toString(),object);
     }

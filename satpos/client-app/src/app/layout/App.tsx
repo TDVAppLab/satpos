@@ -18,6 +18,7 @@ import WebsiteSettingForm from '../../features/WebsiteSetting/form/WebsiteSettin
 import useTrackingGA4 from '../common/utils/useTrackingGA4';
 import { RouteAuthChk } from '../common/RouteAuthChk';
 import MainSatView from '../../features/MainSatView/MainSatView';
+import Batchlog from '../../features/BatchLog/batchlog';
 
 function App() {
 
@@ -60,6 +61,7 @@ function App() {
                 <Route key = {location.key} path = '/websitesettingcreate' element={ <RouteAuthChk component={<WebsiteSettingForm />} redirect="/login" isauth={true} /> } />
                 
                 
+                <Route path='/batchlog' element={<Batchlog />} />
 
                 <Route path='/errors' element={<TestErrors />} />
                 <Route path='/server-error' element={<ServerError />} />

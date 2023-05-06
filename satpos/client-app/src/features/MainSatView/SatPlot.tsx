@@ -38,6 +38,8 @@ const SatPlot = ({noradcatid}: Props) => {
 
     useFrame((state) => {
 
+      const scale = 100;
+
       if(satRec.satnum !== "00000"){
         
         // 現在時刻の衛星の位置を計算
@@ -55,16 +57,16 @@ const SatPlot = ({noradcatid}: Props) => {
         //console.log(positionGd.latitude*180/3.14); // 緯度[rad]
         //console.log(positionGd.height); // 高度[km]
         
-        ref.current.position.x =   1.1 * Math.cos(positionGd.latitude)*Math.cos(positionGd.longitude);
-        ref.current.position.y =   1.1 * Math.sin(positionGd.latitude);
-        ref.current.position.z = - 1.1 * Math.cos(positionGd.latitude)*Math.sin(positionGd.longitude);
+        ref.current.position.x =   scale * 1.1 * Math.cos(positionGd.latitude)*Math.cos(positionGd.longitude);
+        ref.current.position.y =   scale * 1.1 * Math.sin(positionGd.latitude);
+        ref.current.position.z = - scale * 1.1 * Math.cos(positionGd.latitude)*Math.sin(positionGd.longitude);
 
       }
     });
 
     return (
       <mesh ref={ref} >
-        <sphereGeometry args={[0.01, 32, 32]} />
+        <sphereGeometry args={[0.8, 32, 32]} />
         <meshStandardMaterial color="red" />
       </mesh>
     );

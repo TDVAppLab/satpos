@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import { useEffect } from 'react';
-import { Container } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
 import GoogleAd from '../../app/common/utils/GoogleAd';
 import LoadingComponent from '../../app/layout/LoadingComponents';
 import { useStore } from '../../app/stores/store';
@@ -12,12 +12,15 @@ export default observer(function MainSatView() {
     const { siteAnalyticsStore } = useStore();
     
     const { tlestringStore } = useStore();
-    const { loadObjects } = tlestringStore;
+    const { loadObjects, setSelectedTlestring, tlestringRegistry } = tlestringStore;
     const { userStore: {user}} = useStore();
   
     useEffect(() => {
-        if(tlestringStore.tlestringRegistry.size <= 1) loadObjects();
-    },[tlestringStore.tlestringRegistry.size, loadObjects])
+        if(tlestringRegistry.size <= 1) {
+          loadObjects();
+          setSelectedTlestring("56301");
+        };
+    },[tlestringRegistry.size, loadObjects])
   
   
     if(tlestringStore.loading) return <LoadingComponent content='Loading objects...' />
@@ -25,12 +28,19 @@ export default observer(function MainSatView() {
 
     return(
         <Container>
-            <div style={{height: '64vh', width: '64vw'}} >
-                <SatScreen  isEditmode={false}  isAutoAnimationExec={false}/>
-            </div>
-            {
-            //<GoogleAd pid={siteAnalyticsStore.GoogleAdsensePublisherId!} uid={siteAnalyticsStore.GoogleAdsenseUnitId!} />
-            }
+            <Row>
+                <Col sm={8}>
+                    <div style={{height: '50vh', width: '50vw'}} >
+                        <SatScreen  isEditmode={false}  isAutoAnimationExec={false}/>
+                    </div>
+                    {
+                    //<GoogleAd pid={siteAnalyticsStore.GoogleAdsensePublisherId!} uid={siteAnalyticsStore.GoogleAdsenseUnitId!} />
+                    }
+                </Col>
+                <Col sm={4}>
+                    <h2>test</h2>
+                </Col>
+            </Row>
         </Container>
 
         

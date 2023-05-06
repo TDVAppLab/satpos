@@ -40,6 +40,7 @@ export default observer ( function NavBar() {
                                     <NavDropdown title={user.username} id="collasible-nav-dropdown-user">
                                         <NavDropdown.Item as={NavLink} to="/register">register</NavDropdown.Item>
                                         <NavDropdown.Item as={NavLink} to="/websitesettings">WebsiteSettings</NavDropdown.Item>
+                                        <NavDropdown.Item as={NavLink} to="/batchlog">batchlog</NavDropdown.Item>
                                         { process.env.NODE_ENV === 'development' &&  <NavDropdown.Item as={NavLink} to="/errors">Errors</NavDropdown.Item>  }     
                                         <NavDropdown.Divider />
                                         <NavDropdown.Item as="a" onClick={handleLogout}>Logout</NavDropdown.Item>

@@ -20,6 +20,7 @@ namespace TDIC.Models.EDM
         public virtual DbSet<SatelliteOrbitalElement> SatelliteOrbitalElements { get; set; }
         public virtual DbSet<tlestring> tlestrings { get; set; }
         public virtual DbSet<t_website_setting> t_website_settings { get; set; }
+        public virtual DbSet<batchlog> batchlogs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -65,6 +66,13 @@ namespace TDIC.Models.EDM
                 entity.Property(e => e.latest_update_user).HasMaxLength(50);
 
                 entity.Property(e => e.memo).HasMaxLength(255);
+            });
+
+            modelBuilder.Entity<batchlog>(entity =>
+            {
+                entity.HasKey(e => e.id);
+
+                entity.ToTable("batchlogs");
             });
 
             OnModelCreatingPartial(modelBuilder);
