@@ -19,6 +19,14 @@ namespace API.Controllers
         {
             return HandleResult(await Mediator.Send(new List.Query{}));
         }
+        [AllowAnonymous]
+        [HttpGet("getactivesatapi")]
+        public async Task<ActionResult> GetActiveSatAPI()
+        {
+
+
+            return HandleResult(await Mediator.Send(new GetFromNORADActiveSatAPITLE.Command{}));
+        }
 
     }
 }
